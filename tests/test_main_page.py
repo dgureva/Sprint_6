@@ -3,7 +3,6 @@ import pytest
 
 from constants import MainPageConstants, URLSConstants
 from locators.main_page_locators import MainPageLocators
-from pages.base_page import BasePage
 from pages.main_page import MainPage
 
 
@@ -41,13 +40,11 @@ class TestMainPage:
     @allure.title("Проверка блока Вопросы о важном")
     @allure.description("Раскрываем вопрос и проверяем корректность текста ответа")
     def test_faq(self, answer, question_locator, answer_locator, driver):
-        base_page = BasePage(driver)
         main_page = MainPage(driver)
-        base_page.open_page(URLSConstants.START_PAGE)
+        main_page.open_page(URLSConstants.START_PAGE)
         exp_text = answer
         text = main_page.get_faq_text(
             question_locator=question_locator,
             answer_locator=answer_locator
         )
         assert text == exp_text
-
